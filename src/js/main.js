@@ -1,53 +1,30 @@
 class DragAndDrop{
-    constructor(elem){
-        this.elem = elem;
+    constructor(elemId){
+        this.elem = document.getElementById(elemId);
+        this.elem.ondragover = () => this.changeClassName('hover');
+        this.elem.ondragleave =()=> this.changeClassName(null);
+        this.elem.ondrop = e => this.createImgList(e);
     }
-    toHover(){
-        this.elem.className = 'hover';
+    changeClassName(className){
+        this.elem.className = className;
         return false
     }
-    toNormal(){
-        this.elem.className ='';
-        return false
-    }
-    createImgList(event){
-        let self = this;
-        event.preventDefault();
-        self.elem.className = 'drop';
-        let files = event.dataTransfer.files;
-        Array.from(files).map(function(file) {
+    createImgList(e){
+        e.preventDefault();
+        this.elem.className = 'drop';
+        Array.from(e.dataTransfer.files).map(file=> {
             if (~file.type.indexOf('image')) {
                 let fread = new FileReader();
                 fread.readAsDataURL(file);
-                fread.onload = (function (file) {
+                fread.onload = (file=>{
                     return function (e) {
                         let img = new Image();
                         img.src = e.target.result;
                         document.body.appendChild(img);
                     };
                 })(file);
-            } else {
-                self.elem.className = 'error'
-            }
+            } else this.elem.className = 'error'
         })
     }
-    createDrag(){
-        let self = this;
-        self.elem.ondragover = function () {
-            self.toHover(self.elem)
-            return false
-        }
-        self.elem.ondragleave = function(){
-            self.toNormal(self.elem)
-            return false
-        }
-        self.elem.ondrop = function (event) {
-            self.createImgList(event)
-        }
-    }
 }
-window.onload = function () {
-    let dropZone = document.getElementById('dropZone'),
-    drag = new DragAndDrop(dropZone);
-    drag.createDrag();
-}
+window.onload = () =>{const drag = new DragAndDrop('dropZone')}
