@@ -2,7 +2,7 @@ class DragAndDrop{
     constructor(elemId){
         this.elem = document.getElementById(elemId);
         this.elem.ondragover = () => this.changeClassName('hover');
-        this.elem.ondragleave =()=> this.changeClassName(null);
+        this.elem.ondragleave =()=> this.changeClassName('');
         this.elem.ondrop = e => this.createImgList(e);
     }
     changeClassName(className){
