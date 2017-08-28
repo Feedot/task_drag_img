@@ -1,36 +1,46 @@
 body {
-    font: 12px Arial, sans-serif;
+    font-family:Arial;
 }
+
 #dropZone {
-    color: #555;
-    font-size: 18px;
-    text-align: center;
+    font-size: 40px;
 
-    width: 400px;
-    padding: 50px 0;
+    width: 100px;
     margin: 50px auto;
+    height: 100px;
 
-    background: #eee;
-    border: 1px solid #ccc;
+    background: url("../img/arrowFront.png") no-repeat;
+    background-position: center;
+    border: 5px solid #48cc80;
+    border-radius: 60px;
 
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    box-shadow: 0 0 8px 0 #000;
 }
 
 #dropZone.hover {
-    background: #ddd;
+    color: #aaa;
+    background: url("../img/arrowBack.png") no-repeat;
+    background-position: center;
     border-color: #aaa;
+    box-shadow:inset 0 0 4px 0 #000;
 }
 
-#dropZone.error {
-    background: #faa;
-    border-color: #f00;
+h1{
+    color:#bf6363;
+    font-size: 25px;
+    text-align: center;
 }
+p{
+    color: #96c824;
+    text-align: center;
+    margin: 0px;
+    font-size: 18px;
+    text-decoration: underline;
 
-#dropZone.drop {
-    background: #afa;
-    border-color: #0f0;
+}
+p.error{
+    color: red;
+    font-size: 16px;
 }
 img{
     width: 100px;

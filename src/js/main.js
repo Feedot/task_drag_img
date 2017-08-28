@@ -1,6 +1,7 @@
 class DragAndDrop{
     constructor(elemId){
         this.elem = document.getElementById(elemId);
+        this.pElem = document.querySelector('p');
         this.elem.ondragover = ()=> this.changeClassName('hover');
         this.elem.ondragleave = ()=> this.changeClassName('');
         this.elem.ondrop = e => this.createImgList(e);
@@ -9,9 +10,14 @@ class DragAndDrop{
         this.elem.className = className;
         return false
     }
+    changePElem(className,innerHtml){
+        this.pElem.className = className;
+        this.pElem.innerHTML = innerHtml
+    }
     createImgList(e){
         e.preventDefault();
-        this.elem.className = 'drop';
+        this.elem.className = '';
+        this.changePElem('','Success! Pull one more image..');
         Array.from(e.dataTransfer.files).map(file=> {
             if (~file.type.indexOf('image')) {
                 let fread = new FileReader();
@@ -21,8 +27,9 @@ class DragAndDrop{
                         img.src = e.target.result;
                         document.body.appendChild(img);
                     };
-            } else this.elem.className = 'error'
+            } else this.changePElem('error','Error!! Pull only image....')
         })
     }
+
 }
 window.onload = () =>{const drag = new DragAndDrop('dropZone')}
