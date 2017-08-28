@@ -4,15 +4,9 @@ class DragAndDrop {
 
         this.elem = document.getElementById(elemId);
         this.pElem = document.querySelector('p');
-        this.elem.ondragover = () => this.changeClassName('hover');
-        this.elem.ondragleave = () => this.changeClassName('');
+        this.elem.ondragover = () => !(this.elem.className = 'hover');
+        this.elem.ondragleave = () => !(this.elem.className = '');
         this.elem.ondrop = e => this.createImgList(e);
-
-    }
-    changeClassName(className) {
-
-        this.elem.className = className;
-        return false
 
     }
     changePElem(className,innerHtml) {
